@@ -114,18 +114,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {"default": env.db()}
+# DATABASES = {"default": env.db()}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'kinmusic-podcast-database',
-#         'USER': 'kinmusic-database-admin', 
-#         'PASSWORD': 'kinmusic-database-admin-password',
-#         'HOST': '192.168.1.2', 
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'kinmusic-podcast-database',
+        'USER': 'kinmusic-database-admin', 
+        'PASSWORD': 'kinmusic-database-admin-password',
+        'HOST': '192.168.3.3', 
+        'PORT': '',
+    }
+}
 
 # if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
 #     DATABASES["default"]["HOST"] = "cloudsql-proxy"
