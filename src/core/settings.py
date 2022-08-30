@@ -123,7 +123,7 @@ DATABASES = {
         'USER': 'kinmusic-database-admin', 
         'PASSWORD': 'kinmusic-database-admin-password',
         'HOST': '192.168.3.3', 
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
