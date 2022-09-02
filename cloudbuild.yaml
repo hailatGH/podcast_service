@@ -31,7 +31,6 @@ steps:
       - 'python'
       - 'manage.py'
       - 'makemigrations'
-      - 'player'
     id: Make migrations
 
   # 3. Migrate
