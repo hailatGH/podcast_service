@@ -13,7 +13,7 @@ webApprouter.register(r'playlistepisode', PlayListEpisodesWebViewSet, basename="
 webApprouter.register(r'purchasedepisode', PurchasedEpisodesWebViewSet, basename="purchasedepisode")
 webApprouter.register(r'purchasedseason', PurchasedSeasonsWebViewSet, basename="purchasedseason")
 
-# mobileApprouter = DefaultRouter(trailing_slash=False)
+mobileApprouter = DefaultRouter(trailing_slash=False)
 # mobileApprouter.register(r'artists', ArtistsMobileViewSet, basename="artists")
 # mobileApprouter.register(r'albumsByArtistId', AlbumByArtistIdViewSet, basename="albumsByArtistId")
 # mobileApprouter.register(r'albums', AlbumsMobileViewSet, basename="albums")
