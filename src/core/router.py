@@ -1,7 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
-from player.views import *
-# from player.mobileAppviews import *
+from player.webAppviews import *
+from player.mobileAppviews import *
 
 webApprouter = DefaultRouter(trailing_slash=False)
 webApprouter.register(r'host', HostsWebViewSet, basename="host")
@@ -14,13 +14,13 @@ webApprouter.register(r'purchasedepisode', PurchasedEpisodesWebViewSet, basename
 webApprouter.register(r'purchasedseason', PurchasedSeasonsWebViewSet, basename="purchasedseason")
 
 mobileApprouter = DefaultRouter(trailing_slash=False)
-# mobileApprouter.register(r'artists', ArtistsMobileViewSet, basename="artists")
-# mobileApprouter.register(r'albumsByArtistId', AlbumByArtistIdViewSet, basename="albumsByArtistId")
-# mobileApprouter.register(r'albums', AlbumsMobileViewSet, basename="albums")
-# mobileApprouter.register(r'tracksByAlbumId', TracksByAlbumIdViewSet, basename="tracksByAlbumId")
-# mobileApprouter.register(r'genres', GenresMobileViewSet, basename="genres")
-# mobileApprouter.register(r'tracksByGenreId', TracksByGenreIdViewSet, basename="tracksByGenreId")
-# mobileApprouter.register(r'tracks', TracksMobileViewSet, basename="tracks")
-# mobileApprouter.register(r'favTracks', FavouritesByUserIdViewSet, basename="favTracks")
-# mobileApprouter.register(r'playlists', PlayListsByUserIdViewSet, basename="playlists")
-# mobileApprouter.register(r'tracksByPlaylistId', PlayListTracksByPlaylistIdViewSet, basename="tracksByPlaylistId")
+mobileApprouter.register(r'hosts', HostsMobileViewSet, basename="hosts")
+mobileApprouter.register(r'seasonsByHostId', SeasonByHostIdViewSet, basename="seasonsByHostId")
+mobileApprouter.register(r'seasons', SeasonsMobileViewSet, basename="seasons")
+mobileApprouter.register(r'episodesBySeasonId', EpisodesBySeasonIdViewSet, basename="episodesBySeasonId")
+mobileApprouter.register(r'categories', CategoriesMobileViewSet, basename="categories")
+mobileApprouter.register(r'episodesByCategoryId', EpisodesByCategoryIdViewSet, basename="episodesByCategoryId")
+mobileApprouter.register(r'episodes', EpisodesMobileViewSet, basename="episodes")
+mobileApprouter.register(r'favEpisodes', FavouritesByUserIdViewSet, basename="favEpisodes")
+mobileApprouter.register(r'playlists', PlayListsByUserIdViewSet, basename="playlists")
+mobileApprouter.register(r'episodesByPlaylistId', PlayListEpisodesByPlaylistIdViewSet, basename="episodesByPlaylistId")

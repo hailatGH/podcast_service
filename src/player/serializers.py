@@ -12,7 +12,7 @@ class HostsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        artist = super().create(validated_data)
+        host = super().create(validated_data)
         try:
             SingleSeason = SeasonsModel(
                 season_name="Singles",
@@ -23,7 +23,7 @@ class HostsSerializer(serializers.ModelSerializer):
                 encoder_FUI=validated_data['encoder_FUI']
             )
             SingleSeason.save()
-            SingleSeason.host_id.add(artist)
+            SingleSeason.host_id.add(host)
         except BaseException as e:
             Subject = "Data Consistancy Problem"
             Email_Body = f"Error: {e}\n\nIssue: Singles season is not created for the host: {validated_data['host_name']}."
@@ -31,7 +31,7 @@ class HostsSerializer(serializers.ModelSerializer):
             Receiver = 'hailat.alx@gmail.com'
 
             send_mail(Subject, Email_Body, Sender, [Receiver], fail_silently=False,)
-        return artist
+        return host
 
 class SeasonsSerializer(serializers.ModelSerializer):
 
