@@ -1,3 +1,4 @@
+import re
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -16,6 +17,16 @@ class HostsWebViewSet(viewsets.ModelViewSet):
     queryset = HostsModel.objects.all()
     serializer_class = HostsSerializer
     pagination_class = StandardResultsSetPagination
+
+class SeasonsByHostIdViewSet(viewsets.ModelViewSet):
+    queryset = SeasonsModel.objects.all()
+    serializer_class = SeasonsSerializer
+    pagination_class =StandardResultsSetPagination
+
+    def list(self, request, *args, **kwargs):
+        hostId = request.query_params['hostId']
+        seasons = SeasonsModel.objects.filter(host_id=hostId).values('id','season_name')
+        return Response(seasons)
 
 class SeasonsWebViewSet(viewsets.ModelViewSet):
 

@@ -39,7 +39,6 @@ class HostsMobileViewSet(viewsets.ModelViewSet):
             for host_count in range(len(page)):
                 seasons = SeasonsModel.objects.filter(season_status=True, host_id=page[host_count]['id'])
                 page[host_count]['noOfSeasons'] = seasons.count() - 1
-                page[host_count]['noOfEpisodes'] = EpisodesModel.objects.filter(episode_status=True, season_id=seasons.filter(season_name='Singles').values('id')[0]['id']).count()
         return Response(page)
 
 class SeasonByHostIdViewSet(viewsets.ModelViewSet):
@@ -104,18 +103,12 @@ class SeasonsMobileViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         userId = request.query_params['userId']
-        seasons = self.queryset.filter(season_status=True).order_by('-created_at').exclude(season_name="Singles").values('id','season_name','season_coverImage','season_description','season_price','host_id')
+        seasons = self.queryset.filter(season_status=True).order_by('-created_at').values('id','season_name','season_coverImage','season_description','season_price','host_id')
         page = self.paginate_queryset(seasons)
         if page is not None:
             for season_count in range(len(page)):
                 hosts = HostsModel.objects.filter(id=page[season_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[season_count]['host_name'] = host_name
+                page[season_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[season_count]['is_purchasedByUser'] = PurchasedSeasonsModel.objects.filter(season_id=page[season_count]['id'], user_FUI=userId).exists()
         return Response(page)
 
@@ -148,15 +141,7 @@ class EpisodesBySeasonIdViewSet(viewsets.ModelViewSet):
         if page is not None:
             for episode_count in range(len(page)):
                 hosts = HostsModel.objects.filter(id=page[episode_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):    
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                elif page[episode_count]['hosts_featuring'] != "":
-                    host_name = host_name + " ft. " + page[episode_count]['hosts_featuring']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[episode_count]['host_name'] = host_name
+                page[episode_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[episode_count]['is_purchasedByUser'] = PurchasedEpisodesModel.objects.filter(episode_id=page[episode_count]['id'], user_FUI=userId).exists()
         return Response(page)
 
@@ -215,15 +200,7 @@ class EpisodesByCategoryIdViewSet(viewsets.ModelViewSet):
         if page is not None:
             for episode_count in range(len(page)):
                 hosts = HostsModel.objects.filter(id=page[episode_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):    
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                elif page[episode_count]['hosts_featuring'] != "":
-                    host_name = host_name + " ft. " + page[episode_count]['hosts_featuring']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[episode_count]['host_name'] = host_name
+                page[episode_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[episode_count]['is_purchasedByUser'] = PurchasedEpisodesModel.objects.filter(episode_id=page[episode_count]['id'], user_FUI=userId).exists()
         return Response(page)
 
@@ -255,15 +232,7 @@ class EpisodesMobileViewSet(viewsets.ModelViewSet):
         if page is not None:
             for episode_count in range(len(page)):
                 hosts = HostsModel.objects.filter(id=page[episode_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):    
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                elif page[episode_count]['hosts_featuring'] != "":
-                    host_name = host_name + " ft. " + page[episode_count]['hosts_featuring']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[episode_count]['host_name'] = host_name
+                page[episode_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[episode_count]['is_purchasedByUser'] = PurchasedEpisodesModel.objects.filter(episode_id=page[episode_count]['id'], user_FUI=userId).exists()
         return Response(page)
 
@@ -299,15 +268,7 @@ class FavouritesByUserIdViewSet(viewsets.ModelViewSet):
                 for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id']:
                     page[fav_count][val] = episodes[0][val]
                 hosts = HostsModel.objects.filter(id=page[fav_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):    
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                elif page[fav_count]['hosts_featuring'] != "":
-                    host_name = host_name + " ft. " + page[fav_count]['hosts_featuring']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[fav_count]['host_name'] = host_name
+                page[fav_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[fav_count]['is_purchasedByUser'] = PurchasedEpisodesModel.objects.filter(episode_id=page[fav_count]['id'], user_FUI=userId).exists()
         return Response(page)
 
@@ -371,14 +332,6 @@ class PlayListEpisodesByPlaylistIdViewSet(viewsets.ModelViewSet):
                 for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id']:
                     page[episode_count][val] = episodes[0][val]
                 hosts = HostsModel.objects.filter(id=page[episode_count]['host_id'])
-                host_name = ""
-                if hosts.count() > 1:
-                    for host_count in range(len(hosts)):    
-                        host_name = host_name + ", " + hosts.values('host_name')[host_count]['host_name']
-                elif page[episode_count]['hosts_featuring'] != "":
-                    host_name = host_name + " ft. " + page[episode_count]['hosts_featuring']
-                else:
-                    host_name = hosts.values('host_name')[0]['host_name']
-                page[episode_count]['host_name'] = host_name
+                page[episode_count]['host_name'] = hosts.values('host_name')[0]['host_name']
                 page[episode_count]['is_purchasedByUser'] = PurchasedEpisodesModel.objects.filter(episode_id=page[episode_count]['id'], user_FUI=userId).exists()
         return Response(page)

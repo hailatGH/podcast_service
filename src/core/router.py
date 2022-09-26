@@ -5,6 +5,7 @@ from player.mobileAppviews import *
 
 webApprouter = DefaultRouter(trailing_slash=False)
 webApprouter.register(r'host', HostsWebViewSet, basename="host")
+webApprouter.register(r'seasonsByHostId', SeasonsByHostIdViewSet, basename="seasonsByHostId")
 webApprouter.register(r'season', SeasonsWebViewSet, basename="season")
 webApprouter.register(r'category', CategoriesWebViewSet, basename="category")
 webApprouter.register(r'episode', EpisodesWebViewSet, basename="episode")
