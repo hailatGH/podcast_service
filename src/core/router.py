@@ -16,7 +16,7 @@ webApprouter.register(r'purchasedseason', PurchasedSeasonsWebViewSet, basename="
 
 mobileApprouter = DefaultRouter(trailing_slash=False)
 mobileApprouter.register(r'hosts', HostsMobileViewSet, basename="hosts")
-mobileApprouter.register(r'seasonsByHostId', SeasonByHostIdViewSet, basename="seasonsByHostId")
+mobileApprouter.register(r'seasonByHostId', SeasonByHostIdViewSet, basename="seasonByHostId")
 mobileApprouter.register(r'seasons', SeasonsMobileViewSet, basename="seasons")
 mobileApprouter.register(r'episodesBySeasonId', EpisodesBySeasonIdViewSet, basename="episodesBySeasonId")
 mobileApprouter.register(r'categories', CategoriesMobileViewSet, basename="categories")
