@@ -136,7 +136,7 @@ class EpisodesBySeasonIdViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         userId = request.query_params['userId']
         seasonId = request.query_params['seasonId']
-        episodes = self.queryset.filter(episode_status=True, season_id=seasonId).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id')
+        episodes = self.queryset.filter(episode_status=True, season_id=seasonId).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id')
         page = self.paginate_queryset(episodes)
         if page is not None:
             for episode_count in range(len(page)):
@@ -195,7 +195,7 @@ class EpisodesByCategoryIdViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         userId = request.query_params['userId']
         categoryId = request.query_params['categoryId']
-        episodes = self.queryset.filter(episode_status=True, category_id=categoryId).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id')
+        episodes = self.queryset.filter(episode_status=True, category_id=categoryId).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id')
         page = self.paginate_queryset(episodes)
         if page is not None:
             for episode_count in range(len(page)):
@@ -227,7 +227,7 @@ class EpisodesMobileViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         userId = request.query_params['userId']
-        episodes = self.queryset.filter(episode_status=True).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id')
+        episodes = self.queryset.filter(episode_status=True).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id')
         page = self.paginate_queryset(episodes)
         if page is not None:
             for episode_count in range(len(page)):
@@ -264,8 +264,8 @@ class FavouritesByUserIdViewSet(viewsets.ModelViewSet):
         if page is not None:
             for fav_count in range(len(page)):
                 page[fav_count]['fav_id'] = page[fav_count]['id']
-                episodes = EpisodesModel.objects.filter(episode_status=True, id=page[fav_count]['episode_id']).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id')
-                for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id']:
+                episodes = EpisodesModel.objects.filter(episode_status=True, id=page[fav_count]['episode_id']).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id')
+                for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id']:
                     page[fav_count][val] = episodes[0][val]
                 hosts = HostsModel.objects.filter(id=page[fav_count]['host_id'])
                 page[fav_count]['host_name'] = hosts.values('host_name')[0]['host_name']
@@ -328,8 +328,8 @@ class PlayListEpisodesByPlaylistIdViewSet(viewsets.ModelViewSet):
         if page is not None:
             for episode_count in range(len(page)):
                 page[episode_count]['playlist_episode_id'] = page[episode_count]['id']
-                episodes = EpisodesModel.objects.filter(id=page[episode_count]['episode_id']).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id')
-                for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_lyrics','episode_price','hosts_featuring','host_id','season_id','category_id']:
+                episodes = EpisodesModel.objects.filter(id=page[episode_count]['episode_id']).order_by('-created_at').values('id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id')
+                for val in ['id','episode_name','episode_description','episode_coverImage','episode_audioFile','episode_price','host_id','season_id','category_id']:
                     page[episode_count][val] = episodes[0][val]
                 hosts = HostsModel.objects.filter(id=page[episode_count]['host_id'])
                 page[episode_count]['host_name'] = hosts.values('host_name')[0]['host_name']
