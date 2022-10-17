@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-sw+m-hg7i6o3c&w@h-vptkm!*&0%!@ikk27cw_512bomqg5_@w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_Podcasts = ['*']
 
 
 # Application definition

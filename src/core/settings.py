@@ -43,10 +43,10 @@ SECRET_KEY = env("SECRET_KEY")
 PODCAST_SERVICE_URL = env("PODCAST_SERVICE_URL", default=None)
 
 if PODCAST_SERVICE_URL:
-    ALLOWED_HOSTS = [urlparse(PODCAST_SERVICE_URL).netloc]
+    ALLOWED_Podcasts = [urlparse(PODCAST_SERVICE_URL).netloc]
     CSRF_TRUSTED_ORIGINS = [PODCAST_SERVICE_URL]
 else:
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_Podcasts = ["*"]
 
 DATABASES = {"default": env.db()}
 
