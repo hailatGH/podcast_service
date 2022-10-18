@@ -34,22 +34,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-<<<<<<< HEAD
+    
     'drf_yasg',
     'rest_framework',
     'corsheaders',
     'django_filters',
     'storages',
-=======
-    client = secretmanager.SecretManagerServiceClient()
-    settings_name = os.getenv("SETTINGS_NAME", "podcast_service_settings_dev")
-    name = f"projects/{project_id}/secrets/{settings_name}/versions/latest"
-    payload = client.access_secret_version(name=name).payload.data.decode(
-        "UTF-8"
-    )
->>>>>>> 8cef9d5193b53023a4dafd99fed4714ec4bb34ab
-
     'core',
     'player',
 ]
