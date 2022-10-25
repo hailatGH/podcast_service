@@ -9,6 +9,7 @@ mv cloudsettings.py settings.py
 
 cd ../../
 git add .
+
 git commit -m "$COMMIT"
 git push --set-upstream origin main
 
