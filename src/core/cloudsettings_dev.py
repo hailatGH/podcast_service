@@ -2,7 +2,7 @@ import io, os, environ, google.auth
 from google.cloud import secretmanager
 from urllib.parse import urlparse
 
-from .basesettings import *
+from .settings import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
