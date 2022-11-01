@@ -1,5 +1,7 @@
-from email.policy import default
 from django.db import models
+from django.core.files import File
+from PIL import Image, ImageOps
+from io import BytesIO
 from core import validators
 
 def Hosts_Cover_Images(instance, filename):
@@ -37,6 +39,16 @@ class HostsModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        image = Image.open(self.host_profileImage)
+        image = image.convert('RGB')
+        image = ImageOps.exif_transpose(image)
+        image_io = BytesIO()
+        image.save(image_io, "JPEG", optimize=True, quality=50)
+        compressed_image = File(image_io, name=str(self.host_profileImage))
+        self.host_profileImage = compressed_image
+        super(HostsModel, self).save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.pk}: {self.host_name}"
 
@@ -55,6 +67,16 @@ class CategoriesModel(models.Model):
     encoder_FUI = models.CharField(null=False, blank=True, max_length=1023)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        image = Image.open(self.category_coverImage)
+        image = image.convert('RGB')
+        image = ImageOps.exif_transpose(image)
+        image_io = BytesIO()
+        image.save(image_io, "JPEG", optimize=True, quality=50)
+        compressed_image = File(image_io, name=str(self.category_coverImage))
+        self.category_coverImage = compressed_image
+        super(CategoriesModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.pk}: {self.category_name}"
@@ -76,6 +98,16 @@ class PodcastsModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        image = Image.open(self.podcast_coverImage)
+        image = image.convert('RGB')
+        image = ImageOps.exif_transpose(image)
+        image_io = BytesIO()
+        image.save(image_io, "JPEG", optimize=True, quality=50)
+        compressed_image = File(image_io, name=str(self.podcast_coverImage))
+        self.podcast_coverImage = compressed_image
+        super(PodcastsModel, self).save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.pk}: {self.podcast_name}"
 
@@ -96,6 +128,16 @@ class SeasonsModel(models.Model):
     encoder_FUI = models.CharField(null=False, blank=True, max_length=1023)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        image = Image.open(self.season_coverImage)
+        image = image.convert('RGB')
+        image = ImageOps.exif_transpose(image)
+        image_io = BytesIO()
+        image.save(image_io, "JPEG", optimize=True, quality=50)
+        compressed_image = File(image_io, name=str(self.season_coverImage))
+        self.season_coverImage = compressed_image
+        super(SeasonsModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.pk}: {self.season_name}"
@@ -121,6 +163,16 @@ class EpisodesModel(models.Model):
     encoder_FUI = models.CharField(null=False, blank=True, max_length=1023)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        image = Image.open(self.episode_coverImage)
+        image = image.convert('RGB')
+        image = ImageOps.exif_transpose(image)
+        image_io = BytesIO()
+        image.save(image_io, "JPEG", optimize=True, quality=50)
+        compressed_image = File(image_io, name=str(self.episode_coverImage))
+        self.episode_coverImage = compressed_image
+        super(EpisodesModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.pk}: {self.episode_name}"
