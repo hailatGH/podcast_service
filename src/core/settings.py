@@ -1,13 +1,27 @@
 import os
 import django
 from django.utils.encoding import force_str
-from .basesettings import *
-django.utils.encoding.force_text = force_str
+from urllib.parse import urlparse
 
-ALLOWED_HOSTS = [
-    "podcast-service.calmgrass-743c6f7f.francecentral.azurecontainerapps.io"]
-CSRF_TRUSTED_ORIGINS = [
-    "https://podcast-service.calmgrass-743c6f7f.francecentral.azurecontainerapps.io/"]
+from dotenv import load_dotenv
+from .basesettings import *
+
+
+django.utils.encoding.force_text = force_str
+load_dotenv()
+
+if os.getenv('ENV') == "ENV":
+    DEBUG = True
+
+SECRET_KEY = (str, os.getenv("SECRET_KEY"))
+URL = os.getenv('URL')
+
+
+if URL:
+    ALLOWED_HOSTS = [urlparse(URL).netloc]
+    CSRF_TRUSTED_ORIGINS = [URL]
+else:
+    ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     'default': {
