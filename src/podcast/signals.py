@@ -20,7 +20,7 @@ def update_document(sender, **kwargs):
     model_name = sender._meta.model_name
     instance = kwargs['instance']
 
-    if app_label == 'player':
+    if app_label == 'podcast':
         # If it is `books.Publisher` that is being updated.
         if model_name == 'Episodesmodel':
             #[CategoriesModel, PodcastsModel, SeasonsModel, HostsModel]
@@ -31,25 +31,25 @@ def update_document(sender, **kwargs):
             for _instance in categoryinstances:
                 registry.update(_instance)
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in seasoninstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in hostinstances:
-                registry.update(_instance)  
+                registry.update(_instance)
         if model_name == 'HostsModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)  
+                registry.update(_instance)
         if model_name == 'SeasonsModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
         if model_name == 'PodcastsModel':
             categoryinstances = instance.CategoriesModel.all()
             episodeinstances = instance.EpisodesModel.all()
@@ -58,19 +58,19 @@ def update_document(sender, **kwargs):
             for _instance in categoryinstances:
                 registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in seasoninstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in hostinstances:
-                registry.update(_instance) 
+                registry.update(_instance)
         if model_name == 'PodcastsModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
-            
+
             for _instance in podcastinstances:
                 registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)   
+                registry.update(_instance)
 
 
 @receiver(post_delete)
@@ -84,7 +84,7 @@ def delete_document(sender, **kwargs):
     model_name = sender._meta.model_name
     instance = kwargs['instance']
 
-    if app_label == 'player':
+    if app_label == 'podcast':
         # If it is `books.Publisher` that is being updated.
         if model_name == 'Episodesmodel':
             #[CategoriesModel, PodcastsModel, SeasonsModel, HostsModel]
@@ -95,25 +95,25 @@ def delete_document(sender, **kwargs):
             for _instance in categoryinstances:
                 registry.update(_instance)
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in seasoninstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in hostinstances:
-                registry.update(_instance)  
+                registry.update(_instance)
         if model_name == 'HostsModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)  
+                registry.update(_instance)
         if model_name == 'SeasonsModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
             for _instance in podcastinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
         if model_name == 'PodcastsModel':
             categoryinstances = instance.CategoriesModel.all()
             episodeinstances = instance.EpisodesModel.all()
@@ -122,21 +122,21 @@ def delete_document(sender, **kwargs):
             for _instance in categoryinstances:
                 registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in seasoninstances:
-                registry.update(_instance)    
+                registry.update(_instance)
             for _instance in hostinstances:
-                registry.update(_instance) 
+                registry.update(_instance)
         if model_name == 'CategoriesModel':
             podcastinstances = instance.PodcastsModel.all()
             episodeinstances = instance.EpisodesModel.all()
-            
+
             for _instance in podcastinstances:
                 registry.update(_instance)
             for _instance in episodeinstances:
-                registry.update(_instance)   
+                registry.update(_instance)
 
-    # if app_label == 'player':
+    # if app_label == 'podcast':
     #     # If it is `books.Publisher` that is being updated.
     #     if model_name == 'ArtistsModel':
     #         instances = instance.ArtistsModel.all()

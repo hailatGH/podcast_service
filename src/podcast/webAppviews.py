@@ -5,23 +5,29 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
-# Standard Results Set Pagination 
+# Standard Results Set Pagination
+
+
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
 
 # Class based model viewsets for the Web App
+
+
 class HostsWebViewSet(viewsets.ModelViewSet):
-    
+
     queryset = HostsModel.objects.all()
     serializer_class = HostsSerializer
     pagination_class = StandardResultsSetPagination
 
+
 class CategoriesWebViewSet(viewsets.ModelViewSet):
-    
+
     queryset = CategoriesModel.objects.all()
     serializer_class = CategoriesSerializer
     pagination_class = StandardResultsSetPagination
+
 
 class PodcastsWebViewSet(viewsets.ModelViewSet):
 
@@ -29,20 +35,22 @@ class PodcastsWebViewSet(viewsets.ModelViewSet):
     serializer_class = PodcastsSerializer
     pagination_class = StandardResultsSetPagination
 
+
 class SeasonsWebViewSet(viewsets.ModelViewSet):
 
     queryset = SeasonsModel.objects.all()
     serializer_class = SeasonsSerializer
     pagination_class = StandardResultsSetPagination
 
+
 class EpisodesWebViewSet(viewsets.ModelViewSet):
-    
+
     queryset = EpisodesModel.objects.all()
     serializer_class = EpisodesSerializer
     pagination_class = StandardResultsSetPagination
 
 # class PlayListsWebViewSet(viewsets.ModelViewSet):
-    
+
 #     queryset = PlayListsModel.objects.all()
 #     serializer_class = PlayListsSerializer
 #     pagination_class = StandardResultsSetPagination
@@ -63,7 +71,7 @@ class EpisodesWebViewSet(viewsets.ModelViewSet):
 #         return Response("Not Allowed")
 
 # class PlayListEpisodesWebViewSet(viewsets.ModelViewSet):
-    
+
 #     queryset = PlayListEpisodesModel.objects.all()
 #     serializer_class = PlayListsEpisodesSerializer
 #     pagination_class = StandardResultsSetPagination

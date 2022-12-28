@@ -1,7 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
-from player.webAppviews import *
-from player.mobileAppviews import *
+from podcast.webAppviews import *
+from podcast.mobileAppviews import *
 
 webApprouter = DefaultRouter(trailing_slash=False)
 webApprouter.register(r'host', HostsWebViewSet, basename="host")
@@ -16,10 +16,13 @@ webApprouter.register(r'episode', EpisodesWebViewSet, basename="episode")
 
 mobileApprouter = DefaultRouter(trailing_slash=False)
 mobileApprouter.register(r'hosts', HostsMobileViewSet, basename="hosts")
-mobileApprouter.register(r'categories', CategoriesMobileViewSet, basename="categories")
-mobileApprouter.register(r'podcasts', PodcastsMobileViewSet, basename="podcasts")
+mobileApprouter.register(
+    r'categories', CategoriesMobileViewSet, basename="categories")
+mobileApprouter.register(
+    r'podcasts', PodcastsMobileViewSet, basename="podcasts")
 mobileApprouter.register(r'seasons', SeasonsMobileViewSet, basename="seasons")
-mobileApprouter.register(r'episodes', EpisodesMobileViewSet, basename="episodes")
+mobileApprouter.register(
+    r'episodes', EpisodesMobileViewSet, basename="episodes")
 # mobileApprouter.register(r'categories', CategoriesMobileViewSet, basename="categories")
 # mobileApprouter.register(r'episodesByCategoryId', EpisodesByCategoryIdViewSet, basename="episodesByCategoryId")
 # mobileApprouter.register(r'episodes', EpisodesMobileViewSet, basename="episodes")
